@@ -6,12 +6,10 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const Email = require("../utils/email");
 
-// eslint-disable-next-line arrow-body-style
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+const signToken = (id) =>
+  jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-};
 
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
@@ -153,9 +151,9 @@ exports.isLoggedIn = async (req, res, next) => {
   next();
 };
 
-// eslint-disable-next-line arrow-body-style
-exports.restrictTo = (...roles) => {
-  return (req, res, next) => {
+exports.restrictTo =
+  (...roles) =>
+  (req, res, next) => {
     // roles ['admin', 'lead-guide']. role='user'
     if (!roles.includes(req.user.role)) {
       return next(
@@ -165,7 +163,6 @@ exports.restrictTo = (...roles) => {
 
     next();
   };
-};
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
