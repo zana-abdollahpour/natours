@@ -1,5 +1,5 @@
 /* eslint-disable */
-import axios from "axios";
+const axios = require("axios");
 import { showAlert } from "./alerts";
 
 // type is either 'password' or 'data'
